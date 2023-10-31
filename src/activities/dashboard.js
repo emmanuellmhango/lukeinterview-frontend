@@ -10,8 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay";
 import { styles } from "../../assets/css/style";
-// import { FACILITY_URL } from "../state/url";
-import { MASTER_FACILITY_URL } from "../state/url";
+import { FACILITY_URL } from "../state/url";
 import { setFacilities } from "../state/facilitySlice";
 
 const Dashboard = ({ navigation }) => {
@@ -20,7 +19,7 @@ const Dashboard = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const getFacilities = async () => {
-    const result = await axios.get(MASTER_FACILITY_URL);
+    const result = await axios.get(FACILITY_URL);
     const { success, facilities } = result.data;
     if (success) {
       dispatch(setFacilities(facilities));
@@ -48,7 +47,9 @@ const Dashboard = ({ navigation }) => {
             >
               <Text style={styles.filterText}>Add Facility</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SearchFacility")}
+            >
               <Text style={styles.filterText}>Search</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("Filter")}>
@@ -65,7 +66,6 @@ const Dashboard = ({ navigation }) => {
                   <Text style={styles.facilityName}>
                     {facility.facility_name}
                   </Text>
-                  <Text style={styles.facilityPhone}>{facility.phone}</Text>
                 </View>
               ))}
           </View>
