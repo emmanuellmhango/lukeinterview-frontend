@@ -25,6 +25,8 @@ const AddFacility = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [masterFacilities, setMasterFacilities] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [distrValue, setDistrValue] = useState(null);
+  const [ownerValue, setOwnerValue] = useState(null);
 
   const getFacilitiesFromMaster = async () => {
     const result = await axios.get(MASTER_FACILITY_URL);
@@ -56,8 +58,8 @@ const AddFacility = ({ navigation }) => {
       facility: {
         facility_code: facility_code,
         facility_name: values.name,
-        district_id: values.district_id,
-        owner_id: values.owner_id,
+        district_id: distrValue,
+        owner_id: ownerValue,
       },
     };
     try {
@@ -113,49 +115,17 @@ const AddFacility = ({ navigation }) => {
                   value={props.values.name}
                 />
                 <Text>District</Text>
-                <DropDownPicker
-                  open={open}
-                  value={value}
-                  items={items}
-                  setOpen={setOpen}
-                  setValue={setValue}
-                  setItems={setItems}
-                />
-                <TextInput
-                  style={styles.input}
-                  keyboardType="email"
-                  onChangeText={props.handleChange("email")}
-                  value={props.values.email}
-                />
-                <Text>Username</Text>
-                <TextInput
-                  style={styles.input}
-                  keyboardType="text"
-                  onChangeText={props.handleChange("username")}
-                  value={props.values.username}
-                />
-                <Text style={styles.textLeft}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  secureTextEntry={true}
-                  onChangeText={props.handleChange("password")}
-                  value={props.values.password}
-                />
+                <DropDownPicker data={districts} setValue={setDistrValue} />
+
+                <Text>Owner</Text>
+                <DropDownPicker data={owners} setValue={setOwnerValue} />
 
                 <TouchableOpacity
                   style={styles.loginBtn}
                   onPress={props.handleSubmit}
                 >
-                  <Text style={styles.getStartedText}>Sign Up</Text>
+                  <Text style={styles.getStartedText}>Add Facility</Text>
                 </TouchableOpacity>
-
-                <View style={styles.bottomDiv}>
-                  <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                    <Text style={styles.signupTextFromLogin}>
-                      Already registered? Login
-                    </Text>
-                  </TouchableOpacity>
-                </View>
               </View>
             )}
           </Formik>
