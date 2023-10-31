@@ -12,8 +12,14 @@ import {
 import { Formik } from "formik";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay";
+import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "../../assets/css/style";
-import { FACILITY_URL } from "../state/url";
+import {
+  FACILITY_URL,
+  MASTER_FACILITY_URL,
+  MASTER_DISTRICT_URL,
+  MASTER_OWNER_URL,
+} from "../state/url";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -25,12 +31,17 @@ const AddFacility = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [masterFacilities, setMasterFacilities] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [owners, setOwners] = useState([]);
   const [distrValue, setDistrValue] = useState(null);
   const [ownerValue, setOwnerValue] = useState(null);
 
   const getFacilitiesFromMaster = async () => {
     const result = await axios.get(MASTER_FACILITY_URL);
     setMasterFacilities(result.data);
+  };
+  const getOwnersFromMaster = async () => {
+    const result = await axios.get(MASTER_OWNER_URL);
+    setOwners(result.data);
   };
   const getDistrictsFromMaster = async () => {
     const result = await axios.get(MASTER_DISTRICT_URL);
@@ -39,6 +50,10 @@ const AddFacility = ({ navigation }) => {
 
   useEffect(() => {
     getFacilitiesFromMaster();
+  }, []);
+
+  useEffect(() => {
+    getOwnersFromMaster();
   }, []);
 
   useEffect(() => {
@@ -115,10 +130,26 @@ const AddFacility = ({ navigation }) => {
                   value={props.values.name}
                 />
                 <Text>District</Text>
-                <DropDownPicker data={districts} setValue={setDistrValue} />
+                <Dropdown
+                  style={styles.dropdown}
+                  data={districts}
+                  labelField="district_name"
+                  valueField="district_code"
+                  onChange={(item) => {
+                    setValue = { setDistrValue };
+                  }}
+                />
 
                 <Text>Owner</Text>
-                <DropDownPicker data={owners} setValue={setOwnerValue} />
+                <Dropdown
+                  style={styles.dropdown}
+                  data={owners}
+                  labelField="facility_owner"
+                  valueField="id"
+                  onChange={(item) => {
+                    setValue = { setOwnerValue };
+                  }}
+                />
 
                 <TouchableOpacity
                   style={styles.loginBtn}

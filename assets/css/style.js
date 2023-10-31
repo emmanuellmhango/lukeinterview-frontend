@@ -41,6 +41,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 14,
   },
+  dropdown: {
+    margin: 16,
+    height: 34,
+    width: "80%",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    paddingLeft: 5,
+    borderRadius: 15,
+    marginBottom: 10,
+  },
   loginTestButton: {
     color: "#fff",
     fontWeight: "bold",
