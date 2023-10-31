@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
   },
   facilities: {
     height: "90%",
-    backgroundColor: "#000",
+    width: "100%",
   },
   headerControls: {
     flex: 1,
@@ -81,16 +81,20 @@ export const styles = StyleSheet.create({
   facility: {
     width: "100%",
     height: 50,
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderColor: "#ddd",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
   },
   facilityName: {
     fontSize: 16,
-    color: "#ccc",
+    color: "#000",
   },
   loginForm: {
     flex: 1,

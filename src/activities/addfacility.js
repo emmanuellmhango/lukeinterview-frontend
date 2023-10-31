@@ -13,6 +13,8 @@ import { Formik } from "formik";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Dropdown } from "react-native-element-dropdown";
+import { setFacilities } from "../state/facilitySlice";
+import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../../assets/css/style";
 import {
   FACILITY_URL,
@@ -28,6 +30,7 @@ const DismissKeyboard = ({ children }) => (
 );
 
 const AddFacility = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [masterFacilities, setMasterFacilities] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -63,7 +66,10 @@ const AddFacility = ({ navigation }) => {
   const handleAddFacility = async (values) => {
     setLoading(true);
     const facilityCodeLength = 8 - distrValue.length;
-    const randomNumber = Math.floor(Math.random() * facilityCodeLength) + 1;
+    const randomNumber = Math.floor(
+      10 ** (facilityCodeLength - 1) +
+        Math.random() * 9 ** (facilityCodeLength - 1)
+    );
     const facility_code = distrValue + randomNumber;
     const data = {
       facility: {
@@ -84,6 +90,7 @@ const AddFacility = ({ navigation }) => {
       if (success) {
         setLoading(false);
         alert("facility registered");
+        dispatch(setFacilities(result.facilities));
         navigation.navigate("Dashboard");
       } else {
         setLoading(false);
@@ -118,7 +125,7 @@ const AddFacility = ({ navigation }) => {
                 <Text>Facility Name</Text>
                 <TextInput
                   style={styles.input}
-                  keyboardType="text"
+                  keyboardType="default"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
                 />

@@ -13,7 +13,7 @@ import { Formik } from "formik";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay";
 import { styles } from "../../assets/css/style";
-import { LOGIN_URL } from "../state/url";
+import { USER_URL } from "../state/url";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -31,11 +31,11 @@ const Signup = ({ navigation }) => {
         name: values.name,
         email: values.email,
         password: values.password,
-        username: values.phone,
+        username: values.username,
       },
     };
     try {
-      const response = await axios.post(LOGIN_URL, data, {
+      const response = await axios.post(USER_URL, data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -48,6 +48,7 @@ const Signup = ({ navigation }) => {
         navigation.navigate("Home");
       } else {
         setLoading(false);
+        console.log(result);
         alert("Oops!. Seems there was an error. Please try again");
       }
     } catch (error) {
@@ -84,21 +85,21 @@ const Signup = ({ navigation }) => {
                 <Text>Name</Text>
                 <TextInput
                   style={styles.input}
-                  keyboardType="text"
+                  keyboardType="default"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
                 />
                 <Text>Email</Text>
                 <TextInput
                   style={styles.input}
-                  keyboardType="email"
+                  keyboardType="email-address"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                 />
                 <Text>Username</Text>
                 <TextInput
                   style={styles.input}
-                  keyboardType="text"
+                  keyboardType="default"
                   onChangeText={props.handleChange("username")}
                   value={props.values.username}
                 />

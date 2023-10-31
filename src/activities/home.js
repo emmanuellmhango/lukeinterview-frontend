@@ -56,12 +56,10 @@ const Home = ({ navigation }) => {
         navigation.navigate("Dashboard");
       } else {
         setLoading(false);
-        navigation.navigate("Dashboard");
         alert("Oops!. Seems the provided details are wrong. Please try again");
       }
     } catch (error) {
       setLoading(false);
-      navigation.navigate("Dashboard");
       alert("Seems there is network problem. Please try again");
     }
   };
@@ -86,7 +84,7 @@ const Home = ({ navigation }) => {
                 <Text>Username</Text>
                 <TextInput
                   style={styles.input}
-                  keyboardType="text"
+                  keyboardType="default"
                   onChangeText={props.handleChange("username")}
                   value={props.values.username}
                 />

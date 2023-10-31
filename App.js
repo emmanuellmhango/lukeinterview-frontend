@@ -33,10 +33,11 @@ export default function App() {
             name="Signup"
             component={Signup}
             options={{
-              title: "",
+              title: "Register",
               headerStyle: {
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "#612cfe",
               },
+              headerTintColor: "#f5f5f5",
             }}
           />
           <Stack.Screen
