@@ -28,7 +28,7 @@
 
 ## 📖 [HOSPITAL MANAGEMENT] <a name="about-project"></a>
 
-This is a backend app that manages the hospital facilities in Malawi. It is built in Expo React Native. It is a mobile application.
+This is a backend app that manages the hospital facilities in Malawi. It is built in Expo React Native. It is a mobile application. You can check the backend from [HERE](https://github.com/emmanuellmhango/lukeinterview-backend)
 
 ## 🛠 Built With <a name="built-with"></a>
 
