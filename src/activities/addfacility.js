@@ -12,8 +12,14 @@ import {
 import { Formik } from "formik";
 import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay";
+import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "../../assets/css/style";
-import { FACILITY_URL } from "../state/url";
+import {
+  FACILITY_URL,
+  MASTER_FACILITY_URL,
+  MASTER_DISTRICT_URL,
+  MASTER_OWNER_URL,
+} from "../state/url";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -25,12 +31,17 @@ const AddFacility = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [masterFacilities, setMasterFacilities] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [owners, setOwners] = useState([]);
   const [distrValue, setDistrValue] = useState(null);
   const [ownerValue, setOwnerValue] = useState(null);
 
   const getFacilitiesFromMaster = async () => {
     const result = await axios.get(MASTER_FACILITY_URL);
     setMasterFacilities(result.data);
+  };
+  const getOwnersFromMaster = async () => {
+    const result = await axios.get(MASTER_OWNER_URL);
+    setOwners(result.data);
   };
   const getDistrictsFromMaster = async () => {
     const result = await axios.get(MASTER_DISTRICT_URL);
@@ -42,18 +53,18 @@ const AddFacility = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    getOwnersFromMaster();
+  }, []);
+
+  useEffect(() => {
     getDistrictsFromMaster();
   }, []);
 
-  const handleSignup = async (values) => {
+  const handleAddFacility = async (values) => {
     setLoading(true);
-    const districtCode = masterFacilities.filter(
-      (facility) => facility.district_code === values.district_code
-    );
-    const facilityCodeLength = 8 - districtCode.length;
-    const facility_code = districtCode
-      .concat(Math.random().toString(36).substring(facilityCodeLength))
-      .join("");
+    const facilityCodeLength = 8 - distrValue.length;
+    const randomNumber = Math.floor(Math.random() * facilityCodeLength) + 1;
+    const facility_code = distrValue + randomNumber;
     const data = {
       facility: {
         facility_code: facility_code,
@@ -96,16 +107,13 @@ const AddFacility = ({ navigation }) => {
           <Formik
             initialValues={{
               name: "",
-              email: "",
-              password: "",
-              username: "",
             }}
-            onSubmit={handleSignup}
+            onSubmit={handleAddFacility}
           >
             {(props) => (
               <View style={styles.loginForm}>
                 <View style={styles.header}>
-                  <Text style={styles.headerText}>Register</Text>
+                  <Text style={styles.headerText}>Register Facility</Text>
                 </View>
                 <Text>Facility Name</Text>
                 <TextInput
@@ -115,10 +123,26 @@ const AddFacility = ({ navigation }) => {
                   value={props.values.name}
                 />
                 <Text>District</Text>
-                <DropDownPicker data={districts} setValue={setDistrValue} />
+                <Dropdown
+                  style={styles.dropdown}
+                  data={districts}
+                  labelField="district_name"
+                  valueField="district_code"
+                  onChange={(item) => {
+                    setDistrValue(item.district_code);
+                  }}
+                />
 
                 <Text>Owner</Text>
-                <DropDownPicker data={owners} setValue={setOwnerValue} />
+                <Dropdown
+                  style={styles.dropdown}
+                  data={owners}
+                  labelField="facility_owner"
+                  valueField="id"
+                  onChange={(item) => {
+                    setOwnerValue(item.id);
+                  }}
+                />
 
                 <TouchableOpacity
                   style={styles.loginBtn}

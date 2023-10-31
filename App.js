@@ -50,7 +50,7 @@ export default function App() {
             name="AddFacility"
             component={AddFacility}
             options={{
-              title: "Facilities",
+              title: "Add Facility",
               headerStyle: {
                 backgroundColor: "#f5f5f5",
               },
