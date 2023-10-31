@@ -32,6 +32,7 @@ const Dashboard = ({ navigation }) => {
     getFacilities();
   }, []);
 
+  useEffect(() => {}, [facilities]);
   return (
     <View style={styles.container}>
       <ScrollView
@@ -61,14 +62,16 @@ const Dashboard = ({ navigation }) => {
           <View style={styles.facilities}>
             {facilities &&
               facilities.map((facility) => (
-                <View key={facility.id} style={styles.facility}>
-                  <Text style={styles.facilityName}>
-                    {facility.facility_code}
-                  </Text>
-                  <Text style={styles.facilityName}>
-                    {facility.facility_name}
-                  </Text>
-                </View>
+                <TouchableOpacity key={facility.id}>
+                  <View style={styles.facility}>
+                    <Text style={styles.facilityName}>
+                      {facility.facility_code}
+                    </Text>
+                    <Text style={styles.facilityName}>
+                      {facility.facility_name}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               ))}
           </View>
         </View>

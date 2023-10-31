@@ -33,6 +33,7 @@ const FilterFacility = ({ navigation }) => {
   const [owners, setOwners] = useState([]);
   const [distrValue, setDistrValue] = useState(null);
   const [ownerValue, setOwnerValue] = useState(null);
+  const [newFacilities, setNewFacilities] = useState(null);
   const { facilities } = useSelector((state) => state.facilities);
 
   const getOwnersFromMaster = async () => {
@@ -60,14 +61,11 @@ const FilterFacility = ({ navigation }) => {
 
     if (district_id !== null || owner_id !== null) {
       const similarFacilities = facilities.filter((facility) => {
-        const facilityNameMatches = facility.facility_name
-          .toLowerCase()
-          .includes(facility_name.toLowerCase());
         const districtMatches =
           district_id !== null ? facility.district_id === district_id : true;
         const ownerMatches =
           owner_id !== null ? facility.owner_id === owner_id : true;
-        return facilityNameMatches && districtMatches && ownerMatches;
+        return districtMatches && ownerMatches;
       });
 
       if (similarFacilities.length === 0) {
@@ -137,6 +135,29 @@ const FilterFacility = ({ navigation }) => {
               </View>
             )}
           </Formik>
+          <View style={styles.dataResults2}>
+            {newFacilities && newFacilities.length > 0 && (
+              <View style={styles.searchResults}>
+                <Text style={styles.headerText2}>Search Results</Text>
+              </View>
+            )}
+            <View style={styles.searchResultsresults}>
+              {newFacilities &&
+                newFacilities.length > 0 &&
+                newFacilities.map((facility) => (
+                  <TouchableOpacity key={facility.id}>
+                    <View style={styles.facility}>
+                      <Text style={styles.facilityName}>
+                        {facility.facility_code}
+                      </Text>
+                      <Text style={styles.facilityName}>
+                        {facility.facility_name}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+            </View>
+          </View>
         </ScrollView>
         <Spinner visible={loading} textStyle={styles.spinnerTextStyle} />
       </View>
