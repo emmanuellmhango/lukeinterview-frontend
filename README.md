@@ -56,7 +56,7 @@ This is a backend app that manages the hospital facilities in Malawi. It is buil
 
 ## 🚀 Live Demo & preview <a name="live-demo"></a>
 
-- coming soon
+You can download the debug version of the app [VIA HERE](https://expo.dev/artifacts/eas/s8MHz3peX3dx5FNLrJDE8r.apk)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
