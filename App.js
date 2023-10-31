@@ -9,6 +9,8 @@ import Signup from "./src/activities/signup";
 import Dashboard from "./src/activities/dashboard";
 import AddFacility from "./src/activities/addfacility";
 import SearchFacility from "./src/activities/search";
+import FilterFacility from "./src/activities/filter";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -60,6 +62,17 @@ export default function App() {
             component={SearchFacility}
             options={{
               title: "Search Facility",
+              headerStyle: {
+                backgroundColor: "#612cfe",
+              },
+              headerTintColor: "#f5f5f5",
+            }}
+          />
+          <Stack.Screen
+            name="FilterFacility"
+            component={FilterFacility}
+            options={{
+              title: "Filter Facility",
               headerStyle: {
                 backgroundColor: "#612cfe",
               },
