@@ -66,8 +66,12 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     height: "10%",
-    backgroundColor: "#abc",
+    backgroundColor: "#612cfe",
     padding: 10,
+  },
+  filterText: {
+    color: "#f5f5f5",
+    fontSize: 16,
   },
   getStartedText: {
     color: "#f5f5f5",

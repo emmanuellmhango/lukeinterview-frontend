@@ -8,6 +8,7 @@ import Home from "./src/activities/home";
 import Signup from "./src/activities/signup";
 import Dashboard from "./src/activities/dashboard";
 import AddFacility from "./src/activities/addfacility";
+import SearchFacility from "./src/activities/search";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -40,10 +41,7 @@ export default function App() {
             name="Dashboard"
             component={Dashboard}
             options={{
-              title: "Facilities",
-              headerStyle: {
-                backgroundColor: "#f5f5f5",
-              },
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -52,8 +50,20 @@ export default function App() {
             options={{
               title: "Add Facility",
               headerStyle: {
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "#612cfe",
               },
+              headerTintColor: "#f5f5f5",
+            }}
+          />
+          <Stack.Screen
+            name="SearchFacility"
+            component={SearchFacility}
+            options={{
+              title: "Search Facility",
+              headerStyle: {
+                backgroundColor: "#612cfe",
+              },
+              headerTintColor: "#f5f5f5",
             }}
           />
         </Stack.Navigator>
