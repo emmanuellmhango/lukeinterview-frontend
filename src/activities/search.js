@@ -28,10 +28,10 @@ const SearchFacility = ({ navigation }) => {
   const handleAddFacility = async (values) => {
     setLoading(true);
 
-    const facility_name = values.name;
+    const fname = values.name;
 
     const similarFacilities = facilities.filter((facility) =>
-      facility.facility_name.toLowerCase().includes(facility_name.toLowerCase())
+      facility.facility_name.toLowerCase().includes(fname.toLowerCase())
     );
     if (similarFacilities.length === 0) {
       setLoading(false);
@@ -44,7 +44,7 @@ const SearchFacility = ({ navigation }) => {
 
   return (
     <DismissKeyboard>
-      <View style={styles.container}>
+      <View style={styles.container2}>
         <ScrollView
           contentContainerStyle={{
             width: Dimensions.get("window").width,
@@ -58,13 +58,13 @@ const SearchFacility = ({ navigation }) => {
             onSubmit={handleAddFacility}
           >
             {(props) => (
-              <View style={styles.loginForm}>
-                <View style={styles.header}>
+              <View style={styles.searchForm}>
+                <View style={styles.header2}>
                   <Text style={styles.headerText}>Search Facility</Text>
                 </View>
                 <TextInput
                   style={styles.input}
-                  keyboardType="text"
+                  keyboardType="default"
                   placeholder="Facility Name"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
@@ -74,24 +74,34 @@ const SearchFacility = ({ navigation }) => {
                   style={styles.loginBtn}
                   onPress={props.handleSubmit}
                 >
-                  <Text style={styles.getStartedText}>Add Facility</Text>
+                  <Text style={styles.getStartedText}>Search Facility</Text>
                 </TouchableOpacity>
               </View>
             )}
           </Formik>
-
-          {newFacilities ||
-            (newFacilities > 0 &&
-              newFacilities.map((facility) => (
-                <View key={facility.id} style={styles.facility}>
-                  <Text style={styles.facilityName}>
-                    {facility.facility_code}
-                  </Text>
-                  <Text style={styles.facilityName}>
-                    {facility.facility_name}
-                  </Text>
-                </View>
-              )))}
+          <View style={styles.dataResults}>
+            {newFacilities && newFacilities.length > 0 && (
+              <View style={styles.searchResults}>
+                <Text style={styles.headerText2}>Search Results</Text>
+              </View>
+            )}
+            <View style={styles.searchResultsresults}>
+              {newFacilities &&
+                newFacilities.length > 0 &&
+                newFacilities.map((facility) => (
+                  <TouchableOpacity key={facility.id}>
+                    <View style={styles.facility}>
+                      <Text style={styles.facilityName}>
+                        {facility.facility_code}
+                      </Text>
+                      <Text style={styles.facilityName}>
+                        {facility.facility_name}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+            </View>
+          </View>
         </ScrollView>
         <Spinner visible={loading} textStyle={styles.spinnerTextStyle} />
       </View>

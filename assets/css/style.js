@@ -6,6 +6,13 @@ export const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#fff",
   },
+  container2: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#fff",
+    flex: 1,
+    alignItems: "flex-start",
+  },
   header: {
     width: "100%",
     height: "10%",
@@ -13,8 +20,19 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  header2: {
+    width: "100%",
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 5,
+  },
   headerText: {
     fontSize: 20,
+    fontWeight: "bold",
+  },
+  headerText2: {
+    fontSize: 18,
     fontWeight: "bold",
   },
   input: {
@@ -94,12 +112,42 @@ export const styles = StyleSheet.create({
   },
   facilityName: {
     fontSize: 16,
-    color: "#000",
+    color: "#3c3f45",
+  },
+  loginForm1: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   loginForm: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+  },
+  searchForm: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: 10,
+    height: "25%",
+  },
+  searchResultsresults: {
+    flex: 1,
+    height: "100%",
+    paddingTop: 0,
+  },
+  dataResults: {
+    height: "83%",
+  },
+
+  dataResults2: {
+    height: "68%",
+  },
+  searchResults: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   bottomDiv: {
     marginTop: 0,

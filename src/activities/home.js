@@ -77,7 +77,7 @@ const Home = ({ navigation }) => {
             onSubmit={handleLogin}
           >
             {(props) => (
-              <View style={styles.loginForm}>
+              <View style={styles.loginForm1}>
                 <View style={styles.header}>
                   <Text style={styles.headerText}>Login</Text>
                 </View>
