@@ -52,7 +52,9 @@ const Dashboard = ({ navigation }) => {
             >
               <Text style={styles.filterText}>Search</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Filter")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("FilterFacility")}
+            >
               <Text style={styles.filterText}>Filter</Text>
             </TouchableOpacity>
           </View>
