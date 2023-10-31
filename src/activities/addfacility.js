@@ -60,15 +60,11 @@ const AddFacility = ({ navigation }) => {
     getDistrictsFromMaster();
   }, []);
 
-  const handleSignup = async (values) => {
+  const handleAddFacility = async (values) => {
     setLoading(true);
-    const districtCode = masterFacilities.filter(
-      (facility) => facility.district_code === values.district_code
-    );
-    const facilityCodeLength = 8 - districtCode.length;
-    const facility_code = districtCode
-      .concat(Math.random().toString(36).substring(facilityCodeLength))
-      .join("");
+    const facilityCodeLength = 8 - distrValue.length;
+    const randomNumber = Math.floor(Math.random() * facilityCodeLength) + 1;
+    const facility_code = distrValue + randomNumber;
     const data = {
       facility: {
         facility_code: facility_code,
@@ -111,16 +107,13 @@ const AddFacility = ({ navigation }) => {
           <Formik
             initialValues={{
               name: "",
-              email: "",
-              password: "",
-              username: "",
             }}
-            onSubmit={handleSignup}
+            onSubmit={handleAddFacility}
           >
             {(props) => (
               <View style={styles.loginForm}>
                 <View style={styles.header}>
-                  <Text style={styles.headerText}>Register</Text>
+                  <Text style={styles.headerText}>Register Facility</Text>
                 </View>
                 <Text>Facility Name</Text>
                 <TextInput
@@ -136,7 +129,7 @@ const AddFacility = ({ navigation }) => {
                   labelField="district_name"
                   valueField="district_code"
                   onChange={(item) => {
-                    setValue = { setDistrValue };
+                    setDistrValue(item.district_code);
                   }}
                 />
 
@@ -147,7 +140,7 @@ const AddFacility = ({ navigation }) => {
                   labelField="facility_owner"
                   valueField="id"
                   onChange={(item) => {
-                    setValue = { setOwnerValue };
+                    setOwnerValue(item.id);
                   }}
                 />
 
