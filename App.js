@@ -61,8 +61,9 @@ export default function App() {
             options={{
               title: "Search Facility",
               headerStyle: {
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "#612cfe",
               },
+              headerTintColor: "#f5f5f5",
             }}
           />
         </Stack.Navigator>

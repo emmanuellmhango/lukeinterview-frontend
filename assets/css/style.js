@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
   },
   filterText: {
     color: "#f5f5f5",
+    fontSize: 16,
   },
   getStartedText: {
     color: "#f5f5f5",

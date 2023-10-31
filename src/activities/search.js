@@ -62,10 +62,10 @@ const SearchFacility = ({ navigation }) => {
                 <View style={styles.header}>
                   <Text style={styles.headerText}>Search Facility</Text>
                 </View>
-                <Text>Facility Name</Text>
                 <TextInput
                   style={styles.input}
                   keyboardType="text"
+                  placeholder="Facility Name"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
                 />
